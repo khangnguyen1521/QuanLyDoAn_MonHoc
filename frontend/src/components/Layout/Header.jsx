@@ -71,8 +71,9 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
             </button>
 
             {isAuthenticated && user ? (
-              <div className="flex items-center space-x-2">
-                <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-1">
+                {/* User Info */}
+                <div className="flex items-center space-x-2 mr-1">
                   {user.avatar ? (
                     <img 
                       src={user.avatar} 
@@ -84,10 +85,19 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
                       <User className="w-4 h-4 text-white" />
                     </div>
                   )}
-                  <span className="text-sm font-medium text-gray-900 dark:text-white max-w-20 truncate">
+                  <span className="text-sm font-medium text-gray-900 dark:text-white max-w-16 truncate hidden sm:block">
                     {user.fullName}
                   </span>
                 </div>
+                
+                {/* Mobile Logout Button */}
+                <button
+                  onClick={handleLogout}
+                  className="p-2 text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors rounded-lg"
+                  title="Đăng xuất"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
               </div>
             ) : (
               <>
@@ -126,7 +136,8 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
           </button>
 
           {isAuthenticated && user ? (
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3 xl:space-x-4">
+              {/* User Info */}
               <div className="flex items-center space-x-3">
                 {user.avatar ? (
                   <img 
@@ -139,21 +150,24 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
                     <User className="w-5 h-5 text-white" />
                   </div>
                 )}
-                <div className="flex flex-col">
-                  <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                <div className="flex flex-col min-w-0">
+                  <span className="text-sm font-semibold text-gray-900 dark:text-white truncate max-w-32 xl:max-w-48">
                     {user.fullName}
                   </span>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                  <span className="text-xs text-gray-500 dark:text-gray-400 truncate max-w-32 xl:max-w-48">
                     {user.email}
                   </span>
                 </div>
               </div>
+              
+              {/* Logout Button */}
               <button
                 onClick={handleLogout}
-                className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 flex items-center space-x-2"
+                className="px-3 xl:px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 hover:border-red-300 dark:hover:border-red-600 transition-colors duration-200 flex items-center space-x-2"
+                title="Đăng xuất"
               >
                 <LogOut className="w-4 h-4" />
-                <span>Đăng xuất</span>
+                <span className="hidden xl:inline">Đăng xuất</span>
               </button>
             </div>
           ) : (
@@ -215,11 +229,35 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
               })}
             </nav>
             
-            {isAuthenticated && (
-              <div className="border-t border-gray-200 dark:border-gray-700 p-4">
+            {isAuthenticated && user && (
+              <div className="border-t border-gray-200 dark:border-gray-700 p-4 space-y-4">
+                {/* User Info in Sidebar */}
+                <div className="flex items-center space-x-3 px-3 py-2 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+                  {user.avatar ? (
+                    <img 
+                      src={user.avatar} 
+                      alt={user.fullName}
+                      className="w-10 h-10 rounded-full object-cover border-2 border-gray-200 dark:border-gray-600"
+                    />
+                  ) : (
+                    <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
+                      <User className="w-5 h-5 text-white" />
+                    </div>
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">
+                      {user.fullName}
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                      {user.email}
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Logout Button */}
                 <button 
                   onClick={handleLogout}
-                  className="flex w-full items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                  className="flex w-full items-center px-3 py-3 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors duration-200 shadow-md"
                 >
                   <LogOut className="mr-3 h-5 w-5" />
                   Đăng xuất
