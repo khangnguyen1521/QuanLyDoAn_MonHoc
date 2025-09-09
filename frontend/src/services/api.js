@@ -4,12 +4,28 @@ const API_BASE_URL = API_CONFIG.BASE_URL;
 
 // Utility function để handle response
 const handleResponse = async (response) => {
-  const data = await response.json();
+  console.log('📡 Response status:', response.status, response.statusText);
+  console.log('📡 Response URL:', response.url);
   
-  if (!response.ok) {
-    throw new Error(data.message || 'Có lỗi xảy ra');
+  let data;
+  try {
+    data = await response.json();
+  } catch (error) {
+    console.error('❌ Failed to parse response as JSON:', error);
+    throw new Error(`HTTP ${response.status}: ${response.statusText} - Invalid JSON response`);
   }
   
+  if (!response.ok) {
+    console.error('❌ API Error:', {
+      status: response.status,
+      statusText: response.statusText,
+      url: response.url,
+      data: data
+    });
+    throw new Error(data.message || `HTTP ${response.status}: ${response.statusText}`);
+  }
+  
+  console.log('✅ API Success:', response.status);
   return data;
 };
 
@@ -52,21 +68,29 @@ export const authAPI = {
 
   // Đăng nhập
   login: async (credentials) => {
-    const response = await fetch(`${API_BASE_URL}/auth/login`, {
-      method: 'POST',
-      headers: createHeaders(),
-      body: JSON.stringify(credentials),
-    });
+    console.log('🔐 Attempting login to:', `${API_BASE_URL}/auth/login`);
+    console.log('🔐 Credentials:', { email: credentials.email, password: '[HIDDEN]' });
     
-    const data = await handleResponse(response);
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: createHeaders(),
+        body: JSON.stringify(credentials),
+      });
+      
+      const data = await handleResponse(response);
     
-    // Lưu token vào localStorage
-    if (data.accessToken) {
-      localStorage.setItem('token', data.accessToken);
-      localStorage.setItem('user', JSON.stringify(data.user));
+      // Lưu token vào localStorage
+      if (data.accessToken) {
+        localStorage.setItem('token', data.accessToken);
+        localStorage.setItem('user', JSON.stringify(data.user));
+      }
+      
+      return data;
+    } catch (error) {
+      console.error('❌ Login failed:', error.message);
+      throw error;
     }
-    
-    return data;
   },
 
   // Lấy thông tin user hiện tại
