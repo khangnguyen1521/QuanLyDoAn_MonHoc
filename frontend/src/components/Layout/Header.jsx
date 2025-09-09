@@ -5,6 +5,8 @@ import {
   PlusCircle, 
   BarChart3, 
   Target, 
+  Users,
+  Mail,
   Settings,
   LogOut,
   Menu,
@@ -28,6 +30,8 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
     { name: 'Giao dịch', href: '/transactions', icon: PlusCircle },
     { name: 'Báo cáo', href: '/reports', icon: BarChart3 },
     { name: 'Mục tiêu', href: '/goals', icon: Target },
+    { name: 'Nhóm', href: '/groups', icon: Users },
+    { name: 'Lời mời', href: '/invites', icon: Mail },
     { name: 'Cài đặt', href: '/settings', icon: Settings },
   ];
 

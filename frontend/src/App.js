@@ -12,6 +12,8 @@ import Register from './pages/Register';
 import Transactions from './pages/Transactions';
 import Reports from './pages/Reports';
 import Goals from './pages/Goals';
+import Groups from './pages/Groups';
+import MyInvites from './pages/MyInvites';
 import Settings from './pages/Settings';
 
 function App() {
@@ -53,6 +55,20 @@ function App() {
             <ProtectedRoute>
               <Layout>
                 <Goals />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/groups" element={
+            <ProtectedRoute>
+              <Layout>
+                <Groups />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/invites" element={
+            <ProtectedRoute>
+              <Layout>
+                <MyInvites />
               </Layout>
             </ProtectedRoute>
           } />

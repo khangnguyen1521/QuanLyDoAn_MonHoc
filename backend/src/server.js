@@ -12,6 +12,8 @@ const connectDB = require('./config/database');
 const authRoutes = require('./routes/auth');
 const financialRoutes = require('./routes/financial');
 const goalsRoutes = require('./routes/goals');
+const groupRoutes = require('./routes/groups');
+const inviteRoutes = require('./routes/invites');
 const { startSessionCleanup } = require('./utils/sessionCleanup');
 
 const app = express();
@@ -53,6 +55,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/auth', authRoutes);
 app.use('/api/financial', financialRoutes);
 app.use('/api/goals', goalsRoutes);
+app.use('/api/groups', groupRoutes);
+app.use('/api/invites', inviteRoutes);
 
 // Routes cơ bản
 app.get('/', (req, res) => {
@@ -63,6 +67,8 @@ app.get('/', (req, res) => {
       auth: '/api/auth',
       financial: '/api/financial',
       goals: '/api/goals',
+      groups: '/api/groups',
+      invites: '/api/invites',
       transactions: '/api/financial',
       categories: '/api/financial/categories',
       summary: '/api/financial/summary'

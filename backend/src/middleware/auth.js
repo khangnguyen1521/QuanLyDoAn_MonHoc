@@ -61,6 +61,7 @@ const authenticate = async (req, res, next) => {
       req.user = {
         _id: user._id,
         userId: user._id,
+        id: user._id, // Thêm field id để tương thích
         sessionId: decoded.sessionId,
         email: user.email,
         role: user.role
