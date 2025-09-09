@@ -42,9 +42,15 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // CORS
+console.log('🔧 CORS Configuration:');
+console.log('- FRONTEND_URL:', process.env.FRONTEND_URL);
+console.log('- Using origin:', process.env.FRONTEND_URL || 'http://localhost:3000');
+
 app.use(cors({
   origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // Body parser

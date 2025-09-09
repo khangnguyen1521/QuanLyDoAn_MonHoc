@@ -7,7 +7,7 @@ const getApiBaseUrl = () => {
   
   // Fallback cho production (OnRender)
   if (process.env.NODE_ENV === 'production') {
-    // Backend URL - đã deploy trên cùng domain
+    // Backend URL - OnRender deployment
     return 'https://quanlydoan-monhoc.onrender.com/api';
   }
   
