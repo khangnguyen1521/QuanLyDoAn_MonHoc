@@ -1,0 +1,43 @@
+services:
+  # Backend API Service
+  - type: web
+    name: quanlydoan-monhoc-backend
+    env: node
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: FRONTEND_URL
+        value: https://financialmanagerment.onrender.com
+      - key: MONGODB_URI
+        sync: false  # Set this manually in OnRender dashboard
+      - key: JWT_SECRET
+        sync: false  # Set this manually in OnRender dashboard
+      - key: JWT_EXPIRE
+        value: 7d
+      - key: BCRYPT_SALT_ROUNDS
+        value: 12
+      - key: SESSION_EXPIRE_DAYS
+        value: 30
+    healthCheckPath: /health
+    
+  # Frontend Static Site
+  - type: static
+    name: financialmanagerment-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://quanlydoan-monhoc-backend.onrender.com/api
+      - key: REACT_APP_APP_NAME
+        value: Financial Hub
+      - key: REACT_APP_VERSION
+        value: 1.0.0
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
