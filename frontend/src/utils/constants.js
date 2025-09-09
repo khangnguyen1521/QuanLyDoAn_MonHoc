@@ -1,5 +1,6 @@
 // API endpoints
-export const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+import { API_CONFIG } from '../config/api';
+export const API_BASE_URL = API_CONFIG.BASE_URL.replace('/api', ''); // Remove /api suffix for constants
 
 export const API_ENDPOINTS = {
   AUTH: {
