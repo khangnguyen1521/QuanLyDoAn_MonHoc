@@ -55,8 +55,129 @@ const GroupCard = ({ group, currentUser, onViewDetail, onEdit, onDelete }) => {
   };
 
   return (
-    <Card className="hover:shadow-lg transition-shadow duration-200">
-      <div className="space-y-4">
+    <Card className="hover:shadow-lg transition-shadow duration-200 p-4 sm:p-6">
+      {/* Mobile Layout */}
+      <div className="block lg:hidden space-y-4">
+        {/* Header - Mobile */}
+        <div className="flex items-start justify-between">
+          <div className="flex-1 min-w-0 pr-3">
+            <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2 truncate">
+              {group.ten_nhom}
+            </h3>
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(group.trang_thai)}`}>
+                {getStatusText(group.trang_thai)}
+              </span>
+              {isCreator && (
+                <span className="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                  👑 Người tạo
+                </span>
+              )}
+              {isAdmin && !isCreator && (
+                <span className="px-2 py-1 text-xs rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+                  🛡️ Admin
+                </span>
+              )}
+            </div>
+          </div>
+          
+          {/* Quick Actions - Mobile */}
+          <div className="flex space-x-1">
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={onViewDetail}
+              className="p-2 hover:bg-blue-50 hover:text-blue-600 rounded-lg"
+              title="Xem chi tiết"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+            </Button>
+            {isAdmin && (
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={onEdit}
+                className="p-2 hover:bg-yellow-50 hover:text-yellow-600 rounded-lg"
+                title="Chỉnh sửa"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+              </Button>
+            )}
+            {isCreator && (
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={onDelete}
+                className="p-2 hover:bg-red-50 hover:text-red-600 rounded-lg"
+                title="Xóa nhóm"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+              </Button>
+            )}
+          </div>
+        </div>
+
+        {/* Description - Mobile */}
+        {group.mo_ta && (
+          <p className="text-gray-600 dark:text-gray-400 text-sm overflow-hidden" style={{
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical'
+          }}>
+            {group.mo_ta}
+          </p>
+        )}
+
+        {/* Group Info - Mobile Grid */}
+        <div className="grid grid-cols-2 gap-2 text-sm">
+          <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
+            <div className="text-gray-500 dark:text-gray-400 text-xs mb-1">👥 Thành viên</div>
+            <div className="font-semibold text-gray-900 dark:text-white">
+              {group.so_luong_thanh_vien || group.thanh_vien?.length || 0}
+            </div>
+          </div>
+          <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
+            <div className="text-gray-500 dark:text-gray-400 text-xs mb-1">💰 Tiền tệ</div>
+            <div className="font-semibold text-gray-900 dark:text-white">
+              {group.tien_te_mac_dinh}
+            </div>
+          </div>
+          <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3 col-span-2">
+            <div className="text-gray-500 dark:text-gray-400 text-xs mb-1">📅 Ngày tạo</div>
+            <div className="font-semibold text-gray-900 dark:text-white text-sm">
+              {formatDate(group.thoi_gian_tao)}
+            </div>
+          </div>
+        </div>
+
+        {/* Split Type - Mobile */}
+        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
+          <div className="flex items-center space-x-2">
+            <span className="text-blue-600 dark:text-blue-400 text-sm font-medium">🔄 Kiểu chia:</span>
+            <span className="text-sm font-semibold text-blue-700 dark:text-blue-300">
+              {groupsHelpers.SPLIT_TYPES.find(type => type.value === group.kieu_chia_mac_dinh)?.label || group.kieu_chia_mac_dinh}
+            </span>
+          </div>
+        </div>
+
+        {/* Main Action Button - Mobile */}
+        <Button
+          onClick={onViewDetail}
+          className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-3 rounded-lg"
+        >
+          📊 Xem chi tiết nhóm
+        </Button>
+      </div>
+
+      {/* Desktop Layout */}
+      <div className="hidden lg:block space-y-4">
         {/* Header */}
         <div className="flex justify-between items-start">
           <div className="flex-1">
@@ -118,7 +239,11 @@ const GroupCard = ({ group, currentUser, onViewDetail, onEdit, onDelete }) => {
 
         {/* Description */}
         {group.mo_ta && (
-          <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-2">
+          <p className="text-gray-600 dark:text-gray-400 text-sm overflow-hidden" style={{
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical'
+          }}>
             {group.mo_ta}
           </p>
         )}
@@ -163,7 +288,6 @@ const GroupCard = ({ group, currentUser, onViewDetail, onEdit, onDelete }) => {
 
         {/* Actions */}
         <div className="space-y-2 pt-2 border-t dark:border-gray-700">
-          {/* Always show primary actions */}
           <div className="flex space-x-2">
             <Button
               size="sm"
@@ -173,7 +297,6 @@ const GroupCard = ({ group, currentUser, onViewDetail, onEdit, onDelete }) => {
             >
               Xem chi tiết
             </Button>
-            {/* Creator-only buttons */}
             {isCreator && (
               <>
                 <Button
@@ -193,7 +316,6 @@ const GroupCard = ({ group, currentUser, onViewDetail, onEdit, onDelete }) => {
               </>
             )}
           </div>
-          
         </div>
       </div>
     </Card>
