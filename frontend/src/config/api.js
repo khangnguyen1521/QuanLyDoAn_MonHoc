@@ -7,8 +7,8 @@ const getApiBaseUrl = () => {
   
   // Fallback cho production (OnRender)
   if (process.env.NODE_ENV === 'production') {
-    // Thay YOUR_BACKEND_URL bằng URL backend thực tế
-    return 'https://YOUR_BACKEND_URL.onrender.com/api';
+    // Hardcode backend URL cho OnRender - THAY ĐỔI URL NÀY
+    return 'https://quanlydoan-monhoc-backend.onrender.com/api';
   }
   
   // Development fallback
