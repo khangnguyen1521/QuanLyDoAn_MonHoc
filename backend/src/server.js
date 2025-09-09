@@ -112,6 +112,13 @@ app.listen(PORT, () => {
   console.log(`🚀 Server đang chạy trên port ${PORT}`);
   console.log(`📱 Frontend URL: ${process.env.FRONTEND_URL || 'http://localhost:3000'}`);
   console.log(`🌐 API URL: http://localhost:${PORT}`);
+  console.log(`🔧 Environment: ${process.env.NODE_ENV}`);
+  console.log(`📋 Available routes:`);
+  console.log(`   - GET  /`);
+  console.log(`   - GET  /health`);
+  console.log(`   - POST /api/auth/login`);
+  console.log(`   - POST /api/auth/register`);
+  console.log(`   - GET  /api/auth/me`);
   
   // Start session cleanup scheduler
   startSessionCleanup(10);
