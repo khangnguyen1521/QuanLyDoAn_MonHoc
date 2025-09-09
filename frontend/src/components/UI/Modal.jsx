@@ -13,10 +13,10 @@ const Modal = ({
   closeOnOverlayClick = true 
 }) => {
   const sizes = {
-    sm: 'max-w-md',
-    md: 'max-w-lg',
-    lg: 'max-w-2xl',
-    xl: 'max-w-4xl',
+    sm: 'max-w-md mx-4',
+    md: 'max-w-lg mx-4',
+    lg: 'max-w-2xl mx-4',
+    xl: 'max-w-4xl mx-4',
     full: 'max-w-full mx-4',
   };
 
@@ -61,7 +61,7 @@ const Modal = ({
 
         {/* Modal */}
         <div className={clsx(
-          'relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 w-full',
+          'relative transform overflow-hidden rounded-lg bg-white dark:bg-gray-800 text-left shadow-xl transition-all sm:my-8 w-full',
           sizes[size]
         )}>
           {/* Header */}

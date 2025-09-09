@@ -39,9 +39,9 @@ const Input = forwardRef(({
           ref={ref}
           type={inputType}
           className={clsx(
-            'w-full py-3 border rounded-lg text-sm placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200',
-            Icon ? 'pl-12' : 'pl-4',
-            (showPasswordToggle && type === 'password') ? 'pr-12' : 'pr-4',
+            'w-full py-2.5 sm:py-3 border rounded-lg text-sm placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200',
+            Icon ? 'pl-10 sm:pl-12' : 'pl-3 sm:pl-4',
+            (showPasswordToggle && type === 'password') ? 'pr-10 sm:pr-12' : 'pr-3 sm:pr-4',
             error 
               ? 'border-red-500 bg-red-50 focus:ring-red-500' 
               : isValid 
@@ -54,7 +54,7 @@ const Input = forwardRef(({
         
         {/* Left Icon */}
         {Icon && (
-          <Icon className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <Icon className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
         )}
         
         {/* Password Toggle Button */}
@@ -62,9 +62,9 @@ const Input = forwardRef(({
           <button
             type="button"
             onClick={togglePasswordVisibility}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+            className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
           >
-            {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+            {showPassword ? <EyeOff className="w-4 h-4 sm:w-5 sm:h-5" /> : <Eye className="w-4 h-4 sm:w-5 sm:h-5" />}
           </button>
         )}
       </div>

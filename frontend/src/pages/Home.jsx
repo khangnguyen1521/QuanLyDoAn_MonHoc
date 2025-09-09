@@ -87,8 +87,8 @@ const Home = () => {
           }}></div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             {/* Text Content */}
             <div className="text-center lg:text-left">
               {/* Badge */}
@@ -97,23 +97,23 @@ const Home = () => {
                 Ứng dụng quản lý tài chính tin cậy
               </div>
 
-              <h1 className="text-4xl md:text-6xl font-bold mb-8 text-gray-900 dark:text-white leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 lg:mb-8 text-gray-900 dark:text-white leading-tight">
                 Quản lý{' '}
                 <span className="text-blue-600 dark:text-blue-400">
                   Tài chính
                 </span>
                 <br />
-                <span className="text-3xl md:text-5xl font-normal text-gray-700 dark:text-gray-300">
+                <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal text-gray-700 dark:text-gray-300">
                   Dễ dàng & Hiệu quả
                 </span>
               </h1>
               
-              <p className="text-xl mb-12 max-w-2xl mx-auto lg:mx-0 text-gray-600 dark:text-gray-300 leading-relaxed">
+              <p className="text-lg lg:text-xl mb-8 lg:mb-12 max-w-2xl mx-auto lg:mx-0 text-gray-600 dark:text-gray-300 leading-relaxed">
                 Theo dõi thu chi, lập kế hoạch ngân sách và đạt được các mục tiêu tài chính của bạn với Monexo - 
                 công cụ quản lý tài chính cá nhân đơn giản và hiệu quả.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start items-center mb-16">
+              <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center lg:justify-start items-center mb-8 lg:mb-16">
                 <Link
                   to="/transactions"
                   className="group inline-flex items-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl"
@@ -205,15 +205,15 @@ const Home = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="group">
-                <div className="bg-white dark:bg-gray-700 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-600">
+                <div className="bg-white dark:bg-gray-700 rounded-xl lg:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-600">
                   <div className="text-center">
-                    <div className="text-4xl md:text-5xl font-bold text-blue-600 dark:text-blue-400 mb-3">
+                    <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-600 dark:text-blue-400 mb-2 lg:mb-3">
                       {stat.number}
                     </div>
-                    <div className="text-gray-600 dark:text-gray-300 font-medium text-sm">
+                    <div className="text-gray-600 dark:text-gray-300 font-medium text-xs sm:text-sm">
                       {stat.label}
                     </div>
                   </div>
@@ -242,7 +242,7 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               const colors = [
